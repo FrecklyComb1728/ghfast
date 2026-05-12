@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GH Fast | MIFENG Github Proxy</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    background: #0d1117;
+    color: #c9d1d9;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .wrap {
+    width: 100%;
+    max-width: 1100px;
+    padding: 72px 32px 0;
+  }
+
+  .header {
+    text-align: center;
+    margin-bottom: 44px;
+  }
+
+  .header svg {
+    width: 56px;
+    height: 56px;
+    fill: #f0f6fc;
+  }
+
+  .header h1 {
+    font-size: 36px;
+    font-weight: 600;
+    color: #f0f6fc;
+    margin-top: 16px;
+    letter-spacing: -0.5px;
+  }
+
+  .header p {
+    font-size: 16px;
+    color: #8b949e;
+    margin-top: 8px;
+  }
+
+  .repo-link {
+    display: inline-flex;
+    align-items: center;
+    margin-top: 16px;
+    font-size: 14px;
+    color: #58a6ff;
+    text-decoration: none;
+  }
+
+  .repo-link:hover {
+    color: #79c0ff;
+    text-decoration: underline;
+  }
+
+  .search-box {
+    position: relative;
+    margin-bottom: 14px;
+  }
+
+  .search-box input {
+    width: 100%;
+    height: 52px;
+    padding: 0 48px 0 20px;
+    font-size: 16px;
+    color: #c9d1d9;
+    background: #0d1117;
+    border: 1px solid #30363d;
+    border-radius: 8px;
+    outline: none;
+  }
+
+  .search-box input:focus {
+    border-color: #58a6ff;
+    box-shadow: 0 0 0 3px rgba(88, 166, 255, 0.15);
+  }
+
+  .search-box input::placeholder {
+    color: #484f58;
+  }
+
+  .search-box svg {
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 22px;
+    height: 22px;
+    fill: #484f58;
+    cursor: pointer;
+  }
+
+  .search-box svg:hover {
+    fill: #58a6ff;
+  }
+
+  .hint {
+    font-size: 14px;
+    color: #8b949e;
+    margin-bottom: 44px;
+  }
+
+  .hint em {
+    font-style: normal;
+    color: #58a6ff;
+  }
+
+  .section-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: #8b949e;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 16px;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px;
+    margin-bottom: 56px;
+  }
+
+  .card {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 14px 16px;
+    background: #161b22;
+    border: 1px solid #21262d;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: background 0.12s, border-color 0.12s;
+  }
+
+  .card:hover {
+    background: #1c2128;
+    border-color: #30363d;
+  }
+
+  .card .label {
+    font-size: 16px;
+    font-weight: 600;
+    color: #58a6ff;
+  }
+
+  .card .sub {
+    font-size: 13px;
+    color: #8b949e;
+  }
+
+  .card .host {
+    font-size: 12px;
+    color: #484f58;
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .foot {
+    text-align: center;
+    padding: 24px;
+    color: #484f58;
+    font-size: 13px;
+  }
+
+  @media (max-width: 800px) {
+    .grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  @media (max-width: 500px) {
+    .grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <div class="header">
+    <svg viewBox="0 0 16 16">
+      <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
+    </svg>
+    <h1>GH Fast</h1>
+    <p>高速、完全 GitHub 镜像代理服务</p>
+    <a class="repo-link" href="https://github.com/FrecklyComb1728/ghfast" target="_blank" rel="noreferrer">@FrecklyComb1728/ghfast</a>
+  </div>
+
+  <div class="search-box">
+    <svg id="searchIcon" viewBox="0 0 16 16"><path d="M10.68 11.74a6 6 0 0 1-7.922-8.982 6 6 0 0 1 8.982 7.922l3.04 3.04a.749.749 0 0 1-.326 1.275.749.749 0 0 1-.734-.215ZM11.5 7a4.499 4.499 0 1 0-8.997 0A4.499 4.499 0 0 0 11.5 7Z"/></svg>
+    <input type="text" id="repoInput" placeholder="输入仓库路径 owner/repo 或粘贴 GitHub 链接" autofocus>
+  </div>
+
+  <div class="hint">
+    支持直接粘贴 GitHub 链接自动跳转，如 <em>https://gist.github.com/user/id</em> &rarr; <em>gist.gh.1s.fan/user/id</em>
+  </div>
+
+  <div class="section-title">代理服务</div>
+
+  <div class="grid">
+    <a class="card" href="https://gh.1s.fan">
+      <div class="label">Web</div>
+      <div class="sub">GitHub 页面</div>
+      <div class="host">gh.1s.fan</div>
+    </a>
+    <a class="card" href="https://raw.gh.1s.fan">
+      <div class="label">Raw</div>
+      <div class="sub">原始文件</div>
+      <div class="host">raw.gh.1s.fan</div>
+    </a>
+    <a class="card" href="https://api.gh.1s.fan">
+      <div class="label">API</div>
+      <div class="sub">REST API</div>
+      <div class="host">api.gh.1s.fan</div>
+    </a>
+    <a class="card" href="https://gist.gh.1s.fan">
+      <div class="label">Gist</div>
+      <div class="sub">代码片段</div>
+      <div class="host">gist.gh.1s.fan</div>
+    </a>
+    <a class="card" href="https://docs.gh.1s.fan">
+      <div class="label">Docs</div>
+      <div class="sub">文档站点</div>
+      <div class="host">docs.gh.1s.fan</div>
+    </a>
+    <a class="card" href="https://objects.gh.1s.fan">
+      <div class="label">Objects</div>
+      <div class="sub">发布 / LFS</div>
+      <div class="host">objects.gh.1s.fan</div>
+    </a>
+    <a class="card" href="https://codeload.gh.1s.fan">
+      <div class="label">Archive</div>
+      <div class="sub">归档下载</div>
+      <div class="host">codeload.gh.1s.fan</div>
+    </a>
+    <a class="card" href="https://assets.gh.1s.fan">
+      <div class="label">Assets</div>
+      <div class="sub">静态资源</div>
+      <div class="host">assets.gh.1s.fan</div>
+    </a>
+    <a class="card" href="https://avatars.gh.1s.fan">
+      <div class="label">Avatars</div>
+      <div class="sub">头像 CDN</div>
+      <div class="host">avatars.gh.1s.fan</div>
+    </a>
+    <a class="card" href="https://camo.gh.1s.fan">
+      <div class="label">Camo</div>
+      <div class="sub">外部图片</div>
+      <div class="host">camo.gh.1s.fan</div>
+    </a>
+    <a class="card" href="https://release-assets.gh.1s.fan">
+      <div class="label">Releases</div>
+      <div class="sub">附件下载</div>
+      <div class="host">release-assets.gh.1s.fan</div>
+    </a>
+    <a class="card" href="https://ghcr.gh.1s.fan">
+      <div class="label">GHCR</div>
+      <div class="sub">容器镜像</div>
+      <div class="host">ghcr.gh.1s.fan</div>
+    </a>
+    <a class="card" href="https://user-images.gh.1s.fan">
+      <div class="label">Images</div>
+      <div class="sub">用户图片</div>
+      <div class="host">user-images.gh.1s.fan</div>
+    </a>
+    <a class="card" href="https://gist-assets.gh.1s.fan">
+      <div class="label">Gist Assets</div>
+      <div class="sub">Gist 附件</div>
+      <div class="host">gist-assets.gh.1s.fan</div>
+    </a>
+    <a class="card" href="https://github-releases.gh.1s.fan">
+      <div class="label">GH Releases</div>
+      <div class="sub">发布资源</div>
+      <div class="host">github-releases.gh.1s.fan</div>
+    </a>
+  </div>
+</div>
+
+<div class="foot">
+  <a class="repo-link" href="https://github.com/FrecklyComb1728/ghfast" target="_blank" rel="noreferrer">GH Fast</a> &mdash; 加速访问 GitHub 资源 &nbsp;|&nbsp; 粘贴链接自动路由至对应子域名
+</div>
+
+<script>
+  var input = document.getElementById('repoInput');
+  var icon = document.getElementById('searchIcon');
+
+  function doSearch() {
+    var raw = (input.value || '').trim();
+    if (!raw) return;
+    var m = raw.match(/^(?:https?:\/\/)?((?:[a-z0-9-]+\.)*github(?:usercontent)?\.com|github\.githubassets\.com|ghcr\.io)(\/.*)?$/i);
+    if (m) {
+      window.location.href = '/https://' + m[1] + (m[2] || '/');
+    } else {
+      window.location.href = '/' + raw;
+    }
+  }
+
+  input.addEventListener('keydown', function (e) {
+    if (e.key === 'Enter') doSearch();
+  });
+
+  icon.addEventListener('click', doSearch);
+</script>
+</body>
+</html>
