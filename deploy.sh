@@ -269,7 +269,7 @@ echo -e "${GREEN}[5/6]${NC} 创建目录结构"
 
 mkdir -p "$WEB_ROOT/proxy_cache_dir/static" "$WEB_ROOT/proxy_cache_dir/dynamic"
 
-SUBDOMAINS=(api raw camo docs gist assets avatars objects codeload ghcr gist-assets user-images release-assets github-releases)
+SUBDOMAINS=(api raw camo docs gist assets avatars objects codeload ghcr gist-assets user-images private-user-images release-assets github-releases)
 for sub in "${SUBDOMAINS[@]}"; do
   mkdir -p "$WEB_ROOT/$sub.$DOMAIN"
 done

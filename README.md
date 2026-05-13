@@ -32,6 +32,7 @@
 | codeload.gh.1s.fan | codeload.github.com |
 | gist-assets.gh.1s.fan | gist-assets.githubusercontent.com |
 | user-images.gh.1s.fan | user-images.githubusercontent.com |
+| private-user-images.gh.1s.fan | private-user-images.githubusercontent.com |
 | release-assets.gh.1s.fan | release-assets.githubusercontent.com |
 | github-releases.gh.1s.fan | github-releases.githubusercontent.com |
 
