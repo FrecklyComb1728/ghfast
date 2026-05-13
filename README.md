@@ -12,6 +12,7 @@
 - **CSP 策略替换** - 自动替换 Content-Security-Policy，避免浏览器拦截
 - **sub_filter 全文替换** - HTML / CSS / JS / JSON 中的 GitHub 域名自动替换为代理域名
 - **一键部署** - 交互式脚本自动完成域名替换、目录创建、SSL 配置、crontab 设置
+- **No if** - 整个配置文件完全没有 if 语句，充分利用 nginx 从上到下的执行顺序
 
 ## 域名映射
 
