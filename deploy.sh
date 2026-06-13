@@ -191,6 +191,7 @@ trap 'rm -rf "$WORK_DIR"' EXIT
 
 cp "$SCRIPT_DIR/nginx.conf" "$WORK_DIR/nginx.conf"
 cp "$SCRIPT_DIR/index.html" "$WORK_DIR/index.html"
+cp "$SCRIPT_DIR/robots.txt" "$WORK_DIR/robots.txt"
 
 # --- 转义域名中的特殊字符供 sed 使用 ---
 DOMAIN_ESC=$(printf '%s' "$DOMAIN" | sed 's/[&/\]/\\&/g')
@@ -284,6 +285,9 @@ echo -e "${GREEN}[6/6]${NC} 部署文件"
 
 cp "$WORK_DIR/index.html" "$WEB_ROOT/$DOMAIN/index.html"
 echo "  index.html -> $WEB_ROOT/$DOMAIN/"
+
+cp "$WORK_DIR/robots.txt" "$WEB_ROOT/$DOMAIN/robots.txt"
+echo "  robots.txt -> $WEB_ROOT/$DOMAIN/"
 
 cp "$WORK_DIR/nginx.conf" "$NGINX_DIR/ghfast.conf"
 echo "  nginx.conf -> $NGINX_DIR/ghfast.conf"

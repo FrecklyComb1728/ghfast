@@ -1,0 +1,14 @@
+User-agent: Amazonbot
+User-agent: SemrushBot
+User-agent: GPTBot
+User-agent: DataForSeoBot
+User-agent: MJ12bot
+User-agent: AhrefsBot
+User-agent: DotBot
+User-agent: SogouBot
+User-agent: Exabot
+User-agent: ia_archiver
+User-agent: meta-externalagent
+User-agent: BacklinksExtendedBot
+User-agent: ClaudeBot
+Disallow: /
